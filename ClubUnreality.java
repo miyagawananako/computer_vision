@@ -2,7 +2,7 @@ import java.awt.Color;
 
 public class ClubUnreality {
 
-  public static MyImage execute(MyImage input1, MyImage input1_bi, MyImage input2, MyImage input2_bi) {
+  public static MyImage execute(Color background_color, MyImage input1, MyImage input1_bi, MyImage input2, MyImage input2_bi, MyImage input3) {
 
     //int width_output = 1280;小さかった
     //int height_output = 720;
@@ -15,11 +15,11 @@ public class ClubUnreality {
 		for(int i = 0; i < height_output; i++) {
 			for(int j = 0; j < width_output; j++) {
 				boolean isProcessed = false;
-        try {
+        //try {
           
           // desk
           double desk_scale = 0.7;
-          int desk_plus_height = 500;
+          int desk_plus_height = 650;
 
           if (i > desk_plus_height && i < input1.height * desk_scale + desk_plus_height && j > (width_output - input1.width * desk_scale) / 2 && j < (width_output + input1.width * desk_scale) / 2) {
             Color color0 = input1_bi.getColor((int)((j - (width_output - input1.width * desk_scale) / 2) / desk_scale), (int)((i - desk_plus_height) / desk_scale));
@@ -39,7 +39,7 @@ public class ClubUnreality {
           }
 
           // macbook
-          double mac_scale = 0.8;
+          double mac_scale = desk_scale * 8 / 7;
           int mac_plus_height = desk_plus_height - 120;
           if (i > mac_plus_height && i < input2.height * mac_scale + mac_plus_height && j > (width_output - input2.width * mac_scale) / 2 && j < (width_output + input2.width) / 2) {
             Color color2_bi = input2_bi.getColor((int)((j - (width_output - input2.width * mac_scale) / 2) / mac_scale), (int)((i - mac_plus_height) / mac_scale));
@@ -50,16 +50,22 @@ public class ClubUnreality {
               isProcessed = true;
             }
           }
+
+          // folder
+          if (i < input3.height && j < input3.width) {
+            Color color3 = input3.getColor(j, i);
+            output.setColor(j, i, color3);
+            isProcessed = true;
+          }
           
           // 背景
           if (!isProcessed) {
-            Color color_green = new Color(0, 255, 0);
-            output.setColor(j, i, color_green);
+            output.setColor(j, i, background_color);
           }
-        } catch (java.lang.ArrayIndexOutOfBoundsException e) {
+        /*} catch (java.lang.ArrayIndexOutOfBoundsException e) {
           Color color_green = new Color(0, 255, 0);
           output.setColor(j, i, color_green);
-        }
+        }*/
 
 			}
 		}

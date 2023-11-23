@@ -4,7 +4,7 @@ import java.awt.*;
 
 public class SpaceFiltering {
 
-	static double filter[] = {
+	/*static double filter[] = {
 		// 0.33333,0,0,0,0.33333,0,0,0,0.33333  // original value
 		// 0.11111,0.11111,0.11111,0.11111,0.11111,0.11111,0.11111,0.11111,0.11111  // 方向に対して重みのない平滑化
 		0,0,0.33333,0,0.33333,0,0.33333,0,0  // 方向に対して重みのある平滑化
@@ -22,9 +22,9 @@ public class SpaceFiltering {
 		// -0.11111,-0.11111,-0.11111,-0.11111,1.88888,-0.11111,-0.11111,-0.11111,-0.11111  //アンシャープマスキング k = 1（参照：https://imagingsolution.net/imaging/unsharpmasking/）
 		// -1,-1,-1,-1,9,-1,-1,-1,-1  // アンシャープマスキング k = 9
 		// -2,-2,-2,-2,17,-2,-2,-2,-2  // アンシャープマスキング k = 18
-	};
+	};*/
 
-	static MyImage execute(MyImage input) {
+	static MyImage execute(MyImage input, double filter[]) {
 		int width = input.width;
 		int height = input.height;
 		int n;

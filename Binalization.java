@@ -4,7 +4,7 @@ import java.awt.Color;
 
 public class Binalization {
 
-	public static MyImage execute(MyImage input) {
+	public static MyImage execute(MyImage input, double S) {
 
 		MyImage output = new MyImage(input.width, input.height);
 	
@@ -19,10 +19,10 @@ public class Binalization {
 
                 // The value changes the blance between black and white.
                 //int S = 255 * 3 / 2;
-                int S = 0; //少しでも画素があったら
+                //double S = 1; //少しでも画素があったら
 
                 int r, g, b;
-                if (original_r + original_g + original_b > S) {
+                if (original_r + original_g + original_b > S) {  // white
                     r = 255;
                     g = 255;
                     b = 255;

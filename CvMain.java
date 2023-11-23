@@ -1,17 +1,26 @@
-
+import java.awt.Color;
 public class CvMain {
 
 
 	static void imageProcessing1() {
 
 		String filename_desk = "desk.png";
+		String filename_mac = "macbook.jpg";
+		String filename_folder = "folder.png";
 
 		String filename_output = "copy.jpg";
 
-		MyImage image_desk, image_desk_binalization, image_ClubUnreality, image_output;
+		MyImage image_desk, image_desk_binalization, image_mac, image_mac_binalization, image_folder, image_folder_binalization, image_folder_mosaic, image_ClubUnreality, image_output;
 	
 		image_desk = JpegFileReader.read(filename_desk);
-		image_desk_binalization = Binalization.execute(image_desk);
+		image_desk_binalization = Binalization.execute(image_desk, 0.0);
+
+		image_mac = JpegFileReader.read(filename_mac);
+		image_mac_binalization = Binalization.execute(image_mac, 255 * 3 - 10);
+
+		image_folder = JpegFileReader.read(filename_folder);
+		image_folder_binalization = Binalization.execute(image_folder, 255 * 3 - 10);
+		image_folder_mosaic = Mosaic.execute(image_folder, image_folder_binalization, new Color(0, 255, 0));//←絶対使う！！
 
 		{
 			//image_output = Negative.execute(image1);
@@ -21,13 +30,12 @@ public class CvMain {
 			//image_output = Scale.execute(image1);
 			//image_output = Rotation.execute(image1);
 			//image_desk_dark = Dark.execute(image_desk);
-			image_ClubUnreality = ClubUnreality.execute(image_desk_binalization, image_desk);
+			image_ClubUnreality = ClubUnreality.execute(image_desk, image_desk_binalization, image_mac, image_mac_binalization);
 			image_output = SpaceFiltering.execute(image_ClubUnreality);
-			//image_output = ClubUnreality.execute(image_desk_binalization);
 		}
 
-		JpegFileWriter.write(filename_output, image_output);
-		//JpegFileWriter.write(filename_output, image_desk_dark);
+		//JpegFileWriter.write(filename_output, image_output);
+		JpegFileWriter.write(filename_output, image_folder_mosaic);
 
 	}
 

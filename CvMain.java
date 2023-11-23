@@ -4,24 +4,33 @@ public class CvMain {
 
 	static void imageProcessing1() {
 
-		String filename1 = "itot.jpg";
+		String filename_desk = "desk.png";
 
-		String filename2 = "copy.jpg";
+		String filename_output = "copy.jpg";
 
-		MyImage image1, image2;
+		MyImage image_desk, image_desk_binalization, image_desk_dark, image_output;
 	
-		image1 = JpegFileReader.read(filename1);
+		image_desk = JpegFileReader.read(filename_desk);
+
+		//KMeans kmeans = new KMeans();
+		//kmeans.clustering(image_desk, 6);
+		//image_desk_chromakey = Chromakey.execute(image_desk, kmeans, 3);
+		image_desk_binalization = Binalization.execute(image_desk);
 
 		{
-			//image2 = Negative.execute(image1);
-			//image2 = Binalization.execute(image1);
-			//image2 = GammaCorrection.execute(image1);
-			//image2 = SpaceFiltering.execute(image1);	
-			//image2 = Scale.execute(image1);
-			image2 = Rotation.execute(image1);
+			//image_output = Negative.execute(image1);
+			//image_output = Binalization.execute(image1);
+			//image_output = GammaCorrection.execute(image1);
+			//image_output = SpaceFiltering.execute(image1);	
+			//image_output = Scale.execute(image1);
+			//image_output = Rotation.execute(image1);
+			//image_desk_dark = Dark.execute(image_desk);
+			image_output= ClubUnreality.execute(image_desk_binalization, image_desk);
+			//image_output = ClubUnreality.execute(image_desk_binalization);
 		}
 
-		JpegFileWriter.write(filename2, image2);
+		JpegFileWriter.write(filename_output, image_output);
+		//JpegFileWriter.write(filename_output, image_desk_dark);
 
 	}
 

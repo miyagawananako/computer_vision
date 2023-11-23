@@ -8,13 +8,9 @@ public class CvMain {
 
 		String filename_output = "copy.jpg";
 
-		MyImage image_desk, image_desk_binalization, image_desk_dark, image_output;
+		MyImage image_desk, image_desk_binalization, image_ClubUnreality, image_output;
 	
 		image_desk = JpegFileReader.read(filename_desk);
-
-		//KMeans kmeans = new KMeans();
-		//kmeans.clustering(image_desk, 6);
-		//image_desk_chromakey = Chromakey.execute(image_desk, kmeans, 3);
 		image_desk_binalization = Binalization.execute(image_desk);
 
 		{
@@ -25,7 +21,8 @@ public class CvMain {
 			//image_output = Scale.execute(image1);
 			//image_output = Rotation.execute(image1);
 			//image_desk_dark = Dark.execute(image_desk);
-			image_output= ClubUnreality.execute(image_desk_binalization, image_desk);
+			image_ClubUnreality = ClubUnreality.execute(image_desk_binalization, image_desk);
+			image_output = SpaceFiltering.execute(image_ClubUnreality);
 			//image_output = ClubUnreality.execute(image_desk_binalization);
 		}
 

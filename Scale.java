@@ -3,7 +3,7 @@ import java.awt.*;
 
 
 public class Scale {
-	static double SCALEX, SCALEY;
+	static double SCALEX = 0.5, SCALEY = 0.5;
 	
 
 	static MyImage execute(MyImage input) {

@@ -3,10 +3,6 @@ import java.awt.Color;
 public class ClubUnreality {
 
   public static MyImage execute(Color background_color, MyImage input1, MyImage input1_bi, MyImage input2, MyImage input2_bi, MyImage input3) {
-
-    //int width_output = 1280;小さかった
-    //int height_output = 720;
-
     int width_output = input1.width;
     int height_output = input1.height;
 
@@ -52,10 +48,20 @@ public class ClubUnreality {
           }
 
           // folder
-          if (i < input3.height && j < input3.width) {
-            Color color3 = input3.getColor(j, i);
-            output.setColor(j, i, color3);
-            isProcessed = true;
+          for (int n = 0; n < 4; n++){
+            int plus_height = 300 * n + 20;
+            int plus_width = (750 * n + 20) % (int)(((width_output - input1.width * desk_scale) / 2));  //deskまでに収める
+            int plus_width_right = (int)(plus_width + width_output - (width_output - input1.width * desk_scale) / 2) - 150;  //調整用の150
+            if ((i > plus_height && i < input3.height + plus_height && j > plus_width && j < input3.width + plus_width)) {
+              Color color3 = input3.getColor(j - plus_width, i - plus_height);
+              output.setColor(j, i, color3);
+              isProcessed = true;
+            }
+            if (!isProcessed && i > plus_height && i < input3.height + plus_height && j > plus_width_right && j < input3.width + plus_width_right){
+              Color color3 = input3.getColor(j - plus_width_right, i - plus_height);
+              output.setColor(j, i, color3);
+              isProcessed = true;
+            }
           }
           
           // 背景

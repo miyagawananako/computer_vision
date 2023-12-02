@@ -4,7 +4,7 @@ import java.awt.Color;
 
 public class AddWindow {
 
-	public static MyImage execute(MyImage input1, MyImage input2) {
+	public static MyImage execute(MyImage input1, MyImage input2, MyImage input3) {
 
 		MyImage output = new MyImage(input1.width, input1.height);
 	
@@ -21,9 +21,19 @@ public class AddWindow {
         if (i < input2.height * scaley && j > (input1.width - input2.width * scalex) / 2 && j < (input1.width + input2.width * scalex) / 2) {
           Color color2 = input2.getColor((int)((j - (input1.width - input2.width * scalex) / 2) / scalex), (int)(i / scaley));
 
-          // windowの背景透過　&& input1の背景が緑
+          // windowの背景透過 && input1の背景が緑
           if (color2.getRed() + color2.getGreen() + color2.getBlue() < 255 * 3 - 100 && color1.getGreen() > 250){
-            output.setColor(j, i, color2);
+            output.setColor(j, i, color2);  //windowの色
+            isProcessed = true;
+          }
+        }
+
+        // food
+        int food_plus_height = 90;
+        if (!isProcessed && i > food_plus_height && i < input3.height + food_plus_height && j > (input1.width - input3.width) / 2 && j < (input1.width + input3.width) / 2){
+          Color color3 = input3.getColor((int)(j - (input1.width - input3.width) / 2), i - food_plus_height);
+          if (color1.getGreen() > 250){
+            output.setColor(j, i, color3);
             isProcessed = true;
           }
         }

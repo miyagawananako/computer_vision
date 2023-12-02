@@ -1,3 +1,5 @@
+// javac *.java -Xdiags:verbose && java CvMain && open copy.jpg
+
 import java.awt.Color;
 
 public class CvMain {
@@ -9,12 +11,16 @@ public class CvMain {
 		String filename_mac = "macbook.jpg";
 		String filename_folder = "folder.png";
 		String filename_window = "window.jpg";
+		String filename_food = "food.JPG";
 
 		String filename_output = "copy.jpg";
 
-		MyImage image_desk, image_desk_filter, image_desk_binalization, image_mac, image_mac_filter, image_mac_binalization, image_folder, image_folder_binalization, image_folder_mosaic, image_window, image_ClubUnreality, image_filter, image_output;
+		MyImage image_desk, image_desk_filter, image_desk_binalization, image_mac, image_mac_filter, image_mac_binalization, image_folder, image_folder_binalization, image_folder_mosaic, image_window, image_window_filter, image_food, image_food_window, image_ClubUnreality, image_filter, image_output;
 
-		Color background_color = new Color(0, 255, 0);
+		Color background_color = new Color(0, 255, 0);  // green
+
+		double filter_sharp [] = {0,-1,0,-1,5,-1,-0,-1,0}; // シャープ化フィルタ
+		double filter_smooth [] = {0,0,0.33333,0,0.33333,0,0.33333,0,0};  //方向に対して重みのある平滑化
 	
 		image_desk = JpegFileReader.read(filename_desk);
 		//image_desk_filter = SpaceFiltering.execute(image_desk);
@@ -27,8 +33,11 @@ public class CvMain {
 		image_folder = JpegFileReader.read(filename_folder);
 		image_folder_mosaic = Mosaic.execute(image_folder, background_color);
 
-		double filter1 [] = {0,-1,0,-1,5,-1,-0,-1,0};
-		image_window = SpaceFiltering.execute(JpegFileReader.read(filename_window), filter1);
+		image_food = SpaceFiltering.execute(GammaCorrection.execute(Scale.execute(JpegFileReader.read(filename_food))), filter_sharp);
+		image_window = JpegFileReader.read(filename_window);
+		//image_food_window = image_window;
+
+		image_window_filter = SpaceFiltering.execute(image_window, filter_sharp);
 
 		{
 			//image_output = Negative.execute(image1);
@@ -39,9 +48,9 @@ public class CvMain {
 			//image_output = Rotation.execute(image1);
 			//image_desk_dark = Dark.execute(image_desk);
 			image_ClubUnreality = ClubUnreality.execute(background_color, image_desk, image_desk_binalization, image_mac, image_mac_binalization, image_folder_mosaic);
-			double filter2 [] = {0,0,0.33333,0,0.33333,0,0.33333,0,0};
-			image_filter = SpaceFiltering.execute(image_ClubUnreality, filter2);
-			image_output = AddWindow.execute(image_filter, image_window); //filterをかけたくないものはここでadd
+			//image_filter = SpaceFiltering.execute(image_ClubUnreality, filter_smooth);
+			image_output = AddWindow.execute(image_ClubUnreality, image_window_filter, image_food); //filterをかけたくないものはここでadd
+			//image_output = image_food_window; //一旦ね。
 			//image_output = image_filter;
 		}
 

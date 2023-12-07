@@ -6,7 +6,7 @@ public class AlphaBlending {
 
 	static MyImage execute(MyImage input1, MyImage input2) {
 
-		final double ALPHA = 0.3;
+		final double ALPHA = 0.2;
 		int width1 = input1.width;
 		int width2 = input2.width;
 		int height1 = input1.height;

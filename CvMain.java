@@ -11,6 +11,7 @@ public class CvMain {
 		String filename_folder = "folder.png";
 		String filename_window = "window.jpg";
 		String filename_food = "food.JPG";
+		String filename_paper = "paper.jpg";
 		// String filename_character = "character_program.png";
 
 		String filename_output = "copy.jpg";
@@ -44,13 +45,17 @@ public class CvMain {
 		image_window = JpegFileReader.read(filename_window);
 		image_window_filter = SpaceFiltering.execute(image_window, filter_sharp);
 
+		MyImage image_paper;
+		image_paper = JpegFileReader.read(filename_paper);
+
 		// character加工
 		// MyImage image_character;
 		// image_character = JpegFileReader.read(filename_character);
 
-		MyImage image_ClubUnreality, image_output;
+		MyImage image_ClubUnreality, image_addwindow, image_output;
 		image_ClubUnreality = ClubUnreality.execute(background_color, image_desk, image_desk_binalization, image_mac, image_mac_binalization, image_folder_mosaic); // image_characterも追加で
-		image_output = AddWindow.execute(image_ClubUnreality, image_window_filter, image_food);
+		image_addwindow = AddWindow.execute(image_ClubUnreality, image_window_filter, image_food);
+		image_output = AlphaBlending.execute(image_paper, image_addwindow);
 
 		JpegFileWriter.write(filename_output, image_output);
 

@@ -6,7 +6,7 @@ public class Mosaic {
 
 		MyImage output = new MyImage(input.width, input.height);
 
-    int step = input.width / 20; //適当に決めた
+    int step = input.width / 20; //モザイクの粒度、適当に決めた
 	
 		for(int i = 0; i < input.height; i = i + step) {
 			for(int j = 0; j < input.width; j = j + step) {

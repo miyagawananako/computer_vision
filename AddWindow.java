@@ -43,9 +43,6 @@ public class AddWindow {
           output.setColor(j, i, color1);
         }
 
-        /*Color color2 = new Color(r, g, b);
-
-				output.setColor(j, i, color2);*/
 			}
 		}
 		

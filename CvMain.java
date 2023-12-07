@@ -36,17 +36,17 @@ public class CvMain {
 		image_folder = JpegFileReader.read(filename_folder);
 		image_folder_mosaic = Mosaic.execute(image_folder, background_color);
 
+		MyImage image_paper;
+		image_paper = JpegFileReader.read(filename_paper);
+
 		// food加工
 		MyImage image_food;
-		image_food = SpaceFiltering.execute(GammaCorrection.execute(Scale.execute(JpegFileReader.read(filename_food))), filter_sharp);
+		image_food = AlphaBlending.execute(image_paper, SpaceFiltering.execute(GammaCorrection.execute(Scale.execute(JpegFileReader.read(filename_food))), filter_sharp));
 		
 		// window加工
 		MyImage image_window, image_window_filter;
 		image_window = JpegFileReader.read(filename_window);
 		image_window_filter = SpaceFiltering.execute(image_window, filter_sharp);
-
-		MyImage image_paper;
-		image_paper = JpegFileReader.read(filename_paper);
 
 		// character加工
 		// MyImage image_character;
@@ -55,7 +55,8 @@ public class CvMain {
 		MyImage image_ClubUnreality, image_addwindow, image_output;
 		image_ClubUnreality = ClubUnreality.execute(background_color, image_desk, image_desk_binalization, image_mac, image_mac_binalization, image_folder_mosaic); // image_characterも追加で
 		image_addwindow = AddWindow.execute(image_ClubUnreality, image_window_filter, image_food);
-		image_output = AlphaBlending.execute(image_paper, image_addwindow);
+		//image_output = AlphaBlending.execute(image_paper, image_addwindow);
+		image_output = image_food;
 
 		JpegFileWriter.write(filename_output, image_output);
 

@@ -52,13 +52,10 @@ public class CvMain {
 		// MyImage image_character;
 		// image_character = JpegFileReader.read(filename_character);
 
-		MyImage image_ClubUnreality, image_addwindow, image_output;
+		MyImage image_ClubUnreality, image_output;
 		image_ClubUnreality = ClubUnreality.execute(background_color, image_desk, image_desk_binalization, image_mac, image_mac_binalization, image_folder_mosaic); // image_characterも追加で
-		image_addwindow = AddWindow.execute(image_ClubUnreality, image_window_filter, image_food);
-		image_output = image_addwindow;
-		//image_output = AlphaBlending.execute(image_paper, image_addwindow);
-		//image_output = image_food;
-
+		image_output = AddWindow.execute(image_ClubUnreality, image_window_filter, image_food);
+		
 		JpegFileWriter.write(filename_output, image_output);
 
 	}

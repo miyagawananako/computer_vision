@@ -21,7 +21,7 @@ public class Mosaic {
           for (int l = 0; l < step; l++){
             try {
               Color color1 = input.getColor(j + k, i + l);
-              if (color1.getRed() + color1.getGreen() + color1.getBlue() > 255 * 3 - 20){ //白なら
+              if (color1.getRed() + color1.getGreen() + color1.getBlue() > 255 * 3 - 20){  //ほぼ白なら背景色を指定
                 r_sum += color.getRed();
                 g_sum += color.getGreen();
                 b_sum += color.getBlue();

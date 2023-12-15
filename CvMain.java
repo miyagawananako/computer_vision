@@ -35,8 +35,7 @@ public class CvMain {
 		MyImage image_folder, image_folder_mosaic, image_folder_green;
 		image_folder = JpegFileReader.read(filename_folder);
 		image_folder_green = AddGreenback.execute(image_folder, 255 * 3 - 150); // 白背景を緑背景にする。そのあとモザイクをかけるのでかなり幅を持たせて白部分をなくす。
-		int[][] default_index = {{0, 0}, {image_folder.width, image_folder.height}};
-		image_folder_mosaic = Mosaic.execute(image_folder_green, default_index);
+		image_folder_mosaic = Mosaic.execute(image_folder_green);
 
 		MyImage image_paper;
 		image_paper = JpegFileReader.read(filename_paper);

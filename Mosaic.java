@@ -3,10 +3,19 @@ import java.awt.Color;
 public class Mosaic {
 
   public static MyImage execute(MyImage input, int[][] index) {
+    return mosaic(input, index);
+	}
+
+  public static MyImage execute(MyImage input) {
+    int[][] index = {{0, 0}, {input.width, input.height}};
+    return mosaic(input, index);
+	}
+
+  public static MyImage mosaic(MyImage input, int[][] index) {
 
 		MyImage output = new MyImage(input.width, input.height);
 
-    int step = input.width / 20; //モザイクの粒度、適当に決めた
+    int step = input.width / 20;
 	
 		for(int i = 0; i < input.height; i = i + step) {
 			for(int j = 0; j < input.width; j = j + step) {

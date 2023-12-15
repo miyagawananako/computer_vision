@@ -20,7 +20,7 @@ public class ClubUnreality {
           Color color0 = input1_bi.getColor((int)((j - (width_output - input1.width * desk_scale) / 2) / desk_scale), (int)((i - desk_plus_height) / desk_scale));
           Color color1 = input1.getColor((int)((j - (width_output - input1.width * desk_scale) / 2) / desk_scale), (int)((i - desk_plus_height) / desk_scale));
 
-          // deskを暗く加工する。（関数にしたいね）
+          // deskを暗く加工する
           if (color0.getRed() > 0){
             int r = (color1.getRed() - 50 >= 0) ? (int)(color1.getRed() - 50) : 0;
             int g = (color1.getGreen() - 50 >= 0) ? (int)(color1.getGreen() - 50) : 0;

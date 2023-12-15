@@ -32,10 +32,11 @@ public class CvMain {
 		image_mac_binalization = Binalization.execute(image_mac, 255 * 3 - 10);
 
 		// folder加工
-		MyImage image_folder, image_folder_mosaic;
+		MyImage image_folder, image_folder_mosaic, image_folder_green;
 		image_folder = JpegFileReader.read(filename_folder);
+		image_folder_green = AddGreenback.execute(image_folder, 255 * 3 - 150); // 白背景を緑背景にする。そのあとモザイクをかけるのでかなり幅を持たせて白部分をなくす。
 		int[][] default_index = {{0, 0}, {image_folder.width, image_folder.height}};
-		image_folder_mosaic = Mosaic.execute(image_folder, background_color, default_index, 255 * 3 - 20);
+		image_folder_mosaic = Mosaic.execute(image_folder_green, default_index);
 
 		MyImage image_paper;
 		image_paper = JpegFileReader.read(filename_paper);
@@ -76,8 +77,7 @@ public class CvMain {
 		System.out.println(greenindex[1][1]);
 
 		//2.緑のスタート座標とゴール座標を受け取って、中にモザイクかけて返す。
-		Color color = new Color(255, 255, 255);  // 何色でも良い
-		image_output = Mosaic.execute(input, color, greenindex, 1000);  //閾値1000にすればcolorが使われない
+		image_output = Mosaic.execute(input, greenindex);
 
 		//image_output = GetGreenIndexTest.execute(input, greenindex); //モザイクかける部分が正しいか確認するテストコード
 

@@ -2,7 +2,7 @@ import java.awt.Color;
 
 public class Mosaic {
 
-  public static MyImage execute(MyImage input, Color color) {
+  public static MyImage execute(MyImage input, Color color, int[][] index, int S) {
 
 		MyImage output = new MyImage(input.width, input.height);
 
@@ -10,7 +10,9 @@ public class Mosaic {
 	
 		for(int i = 0; i < input.height; i = i + step) {
 			for(int j = 0; j < input.width; j = j + step) {
-				
+    /*for(int i = index[0][1]; i < index[1][1]; i = i + step) {
+			for(int j = index[0][0]; j < index[1][0]; j = j + step) {*/
+
         int r_sum = 0;
         int g_sum = 0;
         int b_sum = 0;
@@ -21,7 +23,7 @@ public class Mosaic {
           for (int l = 0; l < step; l++){
             try {
               Color color1 = input.getColor(j + k, i + l);
-              if (color1.getRed() + color1.getGreen() + color1.getBlue() > 255 * 3 - 20){  //ほぼ白なら背景色を指定
+              if (color1.getRed() + color1.getGreen() + color1.getBlue() > S){  //ほぼ白なら背景色を指定
                 r_sum += color.getRed();
                 g_sum += color.getGreen();
                 b_sum += color.getBlue();
@@ -49,14 +51,21 @@ public class Mosaic {
           for (int k = 0; k < step; k++) {
             for (int l = 0; l < step; l++){
               try {
-				        output.setColor(j + k, i + l, color2);
+                if (i + l >= index[0][1] && i + l < index[1][1] && j + k >= index[0][0] && j + k < index[1][0]) {
+				          output.setColor(j + k, i + l, color2);
+                }
+                else {
+                  output.setColor(j + k, i + l, input.getColor(j + k, i + l));
+                }
               } catch (java.lang.ArrayIndexOutOfBoundsException e) {
                 // 行き過ぎたところには画素を置かなくて良い
               }
             }
           }
-			}
+			  }
 		}
+
+
 		
 		return output;
 	}

@@ -34,7 +34,8 @@ public class CvMain {
 		// folder加工
 		MyImage image_folder, image_folder_mosaic;
 		image_folder = JpegFileReader.read(filename_folder);
-		image_folder_mosaic = Mosaic.execute(image_folder, background_color);
+		int[][] default_index = {{0, 0}, {image_folder.width, image_folder.height}};
+		image_folder_mosaic = Mosaic.execute(image_folder, background_color, default_index, 255 * 3 - 20);
 
 		MyImage image_paper;
 		image_paper = JpegFileReader.read(filename_paper);
@@ -60,10 +61,34 @@ public class CvMain {
 
 	}
 
+	static void imageProcessing2() {
+		String filename_input = "face.jpeg";
+		MyImage input =  JpegFileReader.read(filename_input);
+
+		String filename_output = "copy2.jpg";
+		MyImage image_output;
+
+		//1.緑のスタート座標とゴール座標を取得して返す
+		int[][] greenindex = GetGreenIndex.execute(input);
+		System.out.println(greenindex[0][0]);
+		System.out.println(greenindex[0][1]);
+		System.out.println(greenindex[1][0]);
+		System.out.println(greenindex[1][1]);
+
+		//2.緑のスタート座標とゴール座標を受け取って、中にモザイクかけて返す。
+		Color color = new Color(255, 255, 255);  // 何色でも良い
+		image_output = Mosaic.execute(input, color, greenindex, 1000);  //閾値1000にすればcolorが使われない
+
+		//image_output = GetGreenIndexTest.execute(input, greenindex); //モザイクかける部分が正しいか確認するテストコード
+
+		JpegFileWriter.write(filename_output, image_output);
+	}
+
 
 	public static void main(String args[]) {
 
 		imageProcessing1();
+		imageProcessing2();
 
 	}
 }

@@ -47,10 +47,11 @@ public class CvMain {
 		image_food = JpegFileReader.read(filename_food);	// foodの画像を読み込む
 		image_food = Scale.execute(image_food);	// 画像を縮小する
 		image_food= GammaCorrection.execute(image_food);	// 画像をガンマ補正する
-		int[][] greenindex = GetGreenIndex.execute(image_food); // 緑のスタート座標とゴール座標を取得して返す
-		image_food = Mosaic.execute(image_food, image_food.width / 200, greenindex);  // 緑のスタート座標とゴール座標を受け取って、中にモザイクかけて返す
 		image_food = SpaceFiltering.execute(image_food, filter_sharp);	// 画像にシャープ化フィルタを適用する
 		image_food = AlphaBlending.execute(image_paper, image_food);	// 画像をアルファブレンディングする
+		int[][] greenindex = GetGreenIndex.execute(image_food); // 緑のスタート座標とゴール座標を取得して返す
+		// image_food = GetGreenIndexTest.execute(image_food, greenindex);  // greenIndexが取得できていたら内部を黒く塗りつぶす
+		image_food = Mosaic.execute(image_food, image_food.width / 250, greenindex);  // 緑のスタート座標とゴール座標を受け取って、中にモザイクかけて返す
 		
 		// window加工
 		MyImage image_window, image_window_filter;

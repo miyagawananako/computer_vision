@@ -36,7 +36,7 @@ public class ClubUnreality {
         // macbook
         double mac_scale = desk_scale * 8 / 7;
         int mac_plus_height = desk_plus_height - 120;
-        if (i > mac_plus_height && i < input2.height * mac_scale + mac_plus_height && j > (width_output - input2.width * mac_scale) / 2 && j < (width_output + input2.width) / 2) {
+        if (i > mac_plus_height && i < input2.height * mac_scale + mac_plus_height && j > (width_output - input2.width * mac_scale) / 2 && j < (width_output + input2.width * mac_scale) / 2) {
           Color color2_bi = input2_bi.getColor((int)((j - (width_output - input2.width * mac_scale) / 2) / mac_scale), (int)((i - mac_plus_height) / mac_scale));
           Color color2 = input2.getColor((int)((j - (width_output - input2.width * mac_scale) / 2) / mac_scale), (int)((i - mac_plus_height) / mac_scale));
 

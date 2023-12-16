@@ -11,18 +11,18 @@ public class GetGreenIndexTest {
 				
 				Color color1 = input.getColor(j, i);
 
-                int r = color1.getRed();
-                int g = color1.getGreen();
-                int b = color1.getBlue();
+        int r = color1.getRed();
+        int g = color1.getGreen();
+        int b = color1.getBlue();
 
-                Color color2 = new Color(0, 0, 0);
+        Color color2 = new Color(0, 0, 0);
 
-                if (i >= index[0][1] && i < index[1][1] && j >= index[0][0] && j < index[1][0]) {
-                  output.setColor(j, i, color2);
-                }
-                else {
-                  output.setColor(j, i, color1);
-                }
+        if (i >= index[0][1] && i < index[1][1] && j >= index[0][0] && j < index[1][0]) {
+          output.setColor(j, i, color2);
+        }
+        else {
+          output.setColor(j, i, color1);
+        }
 
 				
 			}

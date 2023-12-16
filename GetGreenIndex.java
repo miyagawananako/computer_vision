@@ -30,6 +30,10 @@ public class GetGreenIndex {
 
       }
     }
+    System.out.println(index[0][0]);
+		System.out.println(index[0][1]);
+		System.out.println(index[1][0]);
+		System.out.println(index[1][1]);
     return index;
   }
 

@@ -2,7 +2,7 @@ import java.awt.Color;
 
 public class ClubUnreality {
 
-  public static MyImage execute(Color background_color, MyImage input1, MyImage input1_bi, MyImage input2, MyImage input2_bi, MyImage input3) {
+  public static MyImage execute(Color background_color, MyImage input1, MyImage input1_bi, MyImage input2, MyImage input2_bi, MyImage input3, MyImage input4) {
     int width_output = input1.width;
     int height_output = input1.height;
 
@@ -61,6 +61,15 @@ public class ClubUnreality {
             output.setColor(j, i, color3);
             isProcessed = true;
           }
+        }
+
+        // screen
+        double screen_scale = 0.085;
+        int screen_plus_height = desk_plus_height - 75;
+        if (i > screen_plus_height && i < input4.height * screen_scale + screen_plus_height && j > (width_output - input4.width * screen_scale) / 2 && j < (width_output + input4.width * screen_scale) / 2) {
+          Color color4 = input4.getColor((int)((j - (width_output - input4.width * screen_scale) / 2) / screen_scale), (int)((i - screen_plus_height) / screen_scale));
+          output.setColor(j, i, color4);
+          isProcessed = true;
         }
         
         // 背景

@@ -16,7 +16,7 @@ public class AddGreenback {
                 int r, g, b;
 
                 if (S == 0) {  // 背景透過画像のとき
-                    if (original_r + original_g + original_b > S) {  // white
+                    if (original_r + original_g + original_b > S) {  //　少しでも画素があったら
                         r = original_r;
                         g = original_g;
                         b = original_b;
